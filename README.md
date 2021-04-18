@@ -3,7 +3,7 @@
 
 ## Usage
 ```
-Usage: ls-csv-js [options]
+Usage: ls-csv [options]
 
 Options:
   -v, --version            output the version number

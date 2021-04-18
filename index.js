@@ -7,7 +7,8 @@ import { Command } from 'commander'
 
 const program = new Command()
 
-program.version('0.1.0', "-v, --version")
+program.name("ls-csv")
+program.version('0.1.1', "-v, --version")
 // @ts-ignore
 program.option("-p, --path <paths...>", "Add target directory", ["."])
 // @ts-ignore
