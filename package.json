@@ -1,8 +1,9 @@
 {
   "name": "ls-csv",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Util to list files and output as CSV in NodeJS.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "node ."
   },
@@ -20,8 +21,12 @@
     "url": "https://github.com/Cerlancism/ls-csv-js/issues"
   },
   "homepage": "https://github.com/Cerlancism/ls-csv-js#readme",
-  "devDependencies": {},
   "dependencies": {
+    "commander": "^7.2.0",
+    "mime": "^2.5.2",
     "shelljs": "^0.8.4"
+  },
+  "bin": {
+    "ls-csv": "index.js"
   }
 }
