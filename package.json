@@ -1,0 +1,26 @@
+{
+  "name": "ls-csv",
+  "version": "0.0.1",
+  "description": "Util to list files and output as CSV in NodeJS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cerlancism/ls-csv-js.git"
+  },
+  "keywords": [
+    "ls",
+    "csv"
+  ],
+  "author": "Cerlancism",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cerlancism/ls-csv-js/issues"
+  },
+  "homepage": "https://github.com/Cerlancism/ls-csv-js#readme",
+  "dependencies": {
+    "shelljs": "^0.8.4"
+  }
+}
