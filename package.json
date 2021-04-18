@@ -1,6 +1,6 @@
 {
   "name": "ls-csv",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Util to list files and output as CSV in NodeJS.",
   "main": "index.js",
   "type": "module",
