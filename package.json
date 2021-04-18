@@ -15,11 +15,12 @@
     "csv"
   ],
   "author": "Cerlancism",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Cerlancism/ls-csv-js/issues"
   },
   "homepage": "https://github.com/Cerlancism/ls-csv-js#readme",
+  "devDependencies": {},
   "dependencies": {
     "shelljs": "^0.8.4"
   }
