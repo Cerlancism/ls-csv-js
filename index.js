@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 //@ts-check
 
-import fs, { statSync } from 'fs'
+import { promises as fs } from 'fs'
 import path from 'path'
 import mime from 'mime'
 import { Command } from 'commander'
@@ -28,32 +28,42 @@ const opts = (program.opts())
  */
 const results = []
 
-for (const target of opts.path)
+!(async () =>
 {
-    const files = fs.readdirSync(target).map(x => path.resolve(target, x))
-    for (const file of files)
+    for (const target of opts.path)
     {
-        const fileStat = fs.statSync(file)
-        if (fileStat.isFile())
+        const files = (await fs.readdir(target)).map(x => path.resolve(target, x))
+        for (const file of files)
         {
-            const ext = path.extname(file)
-            const mimeType = mime.getType(ext)
-
-            if (opts.filter.length > 0 && !opts.filter.some(x => mimeType != null && mimeType.includes(x)))
+            try
             {
-                continue
+                const fileStat = await fs.stat(file)
+                if (fileStat.isFile())
+                {
+                    const ext = path.extname(file)
+                    const mimeType = mime.getType(ext)
+
+                    if (opts.filter.length > 0 && !opts.filter.some(x => mimeType != null && mimeType.includes(x)))
+                    {
+                        continue
+                    }
+                    results.push({
+                        date: fileStat.mtime.getTime(),
+                        csv: getCsvDate(fileStat.mtime) + ", " + path.basename(file) + ", " + fileStat.size
+                    })
+                }
             }
-            results.push({
-                date: fileStat.mtime.getTime(),
-                csv: getCsvDate(fileStat.mtime) + ", " + path.basename(file) + ", " + fileStat.size
-            })
+            catch (error)
+            {
+                // Ignore
+            }
         }
     }
-}
 
-const output = results.sort((a, b) => a.date - b.date)
+    const output = results.sort((a, b) => a.date - b.date)
 
-output.forEach(x => console.log(x.csv))
+    output.forEach(x => console.log(x.csv))
+})()
 
 
 /**
