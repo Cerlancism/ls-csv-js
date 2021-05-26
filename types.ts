@@ -5,5 +5,6 @@ declare global
     interface LSOptions extends OptionValues
     {
         filter: string[]
+        NoHeader?: boolean
     }
 }

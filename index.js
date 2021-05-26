@@ -9,27 +9,27 @@ import { Command } from 'commander'
 const program = new Command()
 
 program.name("ls-csv")
-program.version('0.1.1', "-v, --version")
-// @ts-ignore
-program.option("-p, --path <paths...>", "Add target directory", ["."])
-// @ts-ignore
-program.option("-f, --filter <types...>", "Filter files by mime types", [])
+program.version("0.1.3", "-v, --version")
+program.option("-p, --path <paths...>", "add target directory", /** @type {any} */(["."]))
+program.option("-f, --filter <types...>", "filter files by mime types", /** @type {any} */([]))
+program.option("--no-header ", "no csv header")
 program.parse()
+
 
 /** 
  * @type {LSOptions}
  */
 const opts = (program.opts())
 
-// console.error("opts", opts)
-
-/**
- * @type {{date: number, csv: string}[]}
- */
-const results = []
+console.error("opts", opts)
 
 !(async () =>
 {
+    /**
+     * @type {{date: number, csv: string}[]}
+     */
+    const results = []
+
     for (const target of opts.path)
     {
         const files = (await fs.readdir(target)).map(x => path.resolve(target, x))
@@ -62,12 +62,17 @@ const results = []
 
     const output = results.sort((a, b) => a.date - b.date)
 
+    if (!opts.NoHeader)
+    {
+        console.log("Date, ", "Name, ", "Size")
+    }
+
     output.forEach(x => console.log(x.csv))
 })()
 
 
 /**
- * 
+ * Formats date to yyyy-mm-dd hh:mm:ss.sss
  * @param {Date} date 
  */
 function getCsvDate(date)
